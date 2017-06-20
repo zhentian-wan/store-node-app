@@ -1,7 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const store = require('../controllers/storeController');
+const storeCtrl = require('../controllers/storeController');
+
+const {catchErrors} = require('../handlers/errorHandlers');
 // Do work here
-router.get('/', store.homePage);
+router.get('/', storeCtrl.homePage);
+router.get('/add', storeCtrl.addStore);
+router.post('/add', catchErrors(storeCtrl.createStore));
 
 module.exports = router;
